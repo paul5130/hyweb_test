@@ -14,57 +14,67 @@ class WeatherStateResult extends _$WeatherStateResult {
 
   @override
   Future<WeatherState> build() async {
-    final locationList = await ref.watch(fetchLocationListProvider.future);
-    final List<WeatherCardViewModel> list = [];
+    state = const AsyncData(WeatherState.idle());
+    try {
+      state = const AsyncLoading();
+      final locationList = await ref.watch(fetchLocationListProvider.future);
+      final List<WeatherCardViewModel> list = [];
 
-    if (locationList.isNotEmpty) {
-      for (var location in locationList) {
-        final forecast = ForecastViewModel.fromElements(
-          location.weatherElement,
-        );
-
-        final weatherResultViewModels = <WeatherResultViewModel>[];
-        final length = forecast.weatherDescriptions.length;
-
-        for (var i = 0; i < length; i++) {
-          final weatherResultViewModel = WeatherResultViewModel(
-            cityName: location.locationName,
-            startTime: DateFormat(
-              "MM/dd HH:mm",
-            ).format(forecast.weatherDescriptions[i].startDateTime),
-            endTime: DateFormat(
-              "MM/dd HH:mm",
-            ).format(forecast.weatherDescriptions[i].endDateTime),
-            description:
-                forecast.weatherDescriptions[i].parameter.parameterName,
-            rainProbability:
-                '${forecast.rainProbabilities[i].parameter.parameterName} %',
-            maxTemperature:
-                '${forecast.maxTemperatures[i].parameter.parameterName} °C',
-            minTemperature:
-                '${forecast.minTemperatures[i].parameter.parameterName} °C',
-            comfortIndex: forecast.comfortIndices[i].parameter.parameterName,
+      if (locationList.isNotEmpty) {
+        for (var location in locationList) {
+          final forecast = ForecastViewModel.fromElements(
+            location.weatherElement,
           );
-          weatherResultViewModels.add(weatherResultViewModel);
+
+          final weatherResultViewModels = <WeatherResultViewModel>[];
+          final length = forecast.weatherDescriptions.length;
+
+          for (var i = 0; i < length; i++) {
+            final weatherResultViewModel = WeatherResultViewModel(
+              cityName: location.locationName,
+              startTime: DateFormat(
+                "MM/dd HH:mm",
+              ).format(forecast.weatherDescriptions[i].startDateTime),
+              endTime: DateFormat(
+                "MM/dd HH:mm",
+              ).format(forecast.weatherDescriptions[i].endDateTime),
+              description:
+                  forecast.weatherDescriptions[i].parameter.parameterName,
+              rainProbability:
+                  '${forecast.rainProbabilities[i].parameter.parameterName} %',
+              maxTemperature:
+                  '${forecast.maxTemperatures[i].parameter.parameterName} °C',
+              minTemperature:
+                  '${forecast.minTemperatures[i].parameter.parameterName} °C',
+              comfortIndex: forecast.comfortIndices[i].parameter.parameterName,
+            );
+            weatherResultViewModels.add(weatherResultViewModel);
+          }
+
+          list.add(
+            WeatherCardViewModel(
+              weatherResultViewModels: weatherResultViewModels,
+            ),
+          );
         }
 
-        list.add(
-          WeatherCardViewModel(
-            weatherResultViewModels: weatherResultViewModels,
-          ),
-        );
+        _allData = list;
+
+        return WeatherState.idle();
       }
 
-      _allData = list;
-      return WeatherState.list(list: list);
+      _allData = [];
+      return WeatherState.error('No location found');
+    } catch (e) {
+      return WeatherState.error(e.toString());
     }
-
-    return WeatherState.list(list: []);
   }
 
-  void filterByCity(String query) {
+  void filterByCity(String query) async {
+    state = const AsyncData(WeatherState.loading());
+    await Future.delayed(const Duration(seconds: 1));
     if (query.isEmpty) {
-      state = AsyncData(WeatherState.list(list: _allData));
+      state = AsyncData(WeatherState.idle());
     } else {
       final lowerQuery = query.toLowerCase();
       final filteredList = _allData
@@ -74,7 +84,13 @@ class WeatherStateResult extends _$WeatherStateResult {
             ),
           )
           .toList();
-      state = AsyncData(WeatherState.list(list: filteredList));
+      if (filteredList.isNotEmpty) {
+        state = AsyncData(
+          WeatherState.result(weatherCardViewModel: _allData.first),
+        );
+      } else {
+        state = AsyncData(WeatherState.error('沒有符合條件的資料'));
+      }
     }
   }
 }

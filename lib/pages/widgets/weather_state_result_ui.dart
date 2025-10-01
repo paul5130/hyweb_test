@@ -6,10 +6,17 @@ class WeatherStateResultUi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: weatherCardViewModel.weatherResultViewModels
-          .map((e) => WeatherCell(viewModel: e))
-          .toList(),
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: weatherCardViewModel.weatherResultViewModels
+                .map((e) => WeatherCell(viewModel: e))
+                .toList(),
+          ),
+        ),
+      ),
     );
   }
 }

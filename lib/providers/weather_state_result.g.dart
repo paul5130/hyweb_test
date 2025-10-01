@@ -34,7 +34,7 @@ final class WeatherStateResultProvider
 }
 
 String _$weatherStateResultHash() =>
-    r'9e9186a5b7884180f8cebb70b417e9982f407ee9';
+    r'69d6b3b010b9a71e3331c77088937de5e5b78773';
 
 abstract class _$WeatherStateResult extends $AsyncNotifier<WeatherState> {
   FutureOr<WeatherState> build();

@@ -8,35 +8,59 @@ class WeatherCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Text('${viewModel.startTime} - ${viewModel.endTime}'),
-          Row(
-            children: [
-              SizedBox(width: 150, child: Text('天氣現象')),
-              Text(viewModel.description),
-            ],
-          ),
-          Row(
-            children: [
-              SizedBox(width: 150, child: Text('降雨機率')),
-              Text(viewModel.rainProbability),
-            ],
-          ),
-          Row(
-            children: [
-              SizedBox(width: 150, child: Text('溫度')),
-              Text('${viewModel.maxTemperature} - ${viewModel.minTemperature}'),
-            ],
-          ),
-          Row(
-            children: [
-              SizedBox(width: 150, child: Text('舒適度')),
-              Text(viewModel.comfortIndex),
-            ],
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Text(
+              '${viewModel.startTime} - ${viewModel.endTime}',
+              style: TextStyle(fontSize: 24),
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                SizedBox(
+                  width: 150,
+                  child: Text('天氣現象', style: TextStyle(fontSize: 20)),
+                ),
+                Text(viewModel.description, style: TextStyle(fontSize: 20)),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                SizedBox(
+                  width: 150,
+                  child: Text('降雨機率', style: TextStyle(fontSize: 20)),
+                ),
+                Text(viewModel.rainProbability, style: TextStyle(fontSize: 20)),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                SizedBox(
+                  width: 150,
+                  child: Text('溫度', style: TextStyle(fontSize: 20)),
+                ),
+                Text(
+                  '${viewModel.maxTemperature} - ${viewModel.minTemperature}',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                SizedBox(
+                  width: 150,
+                  child: Text('舒適度', style: TextStyle(fontSize: 20)),
+                ),
+                Text(viewModel.comfortIndex, style: TextStyle(fontSize: 20)),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

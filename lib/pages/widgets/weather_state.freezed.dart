@@ -55,11 +55,13 @@ extension WeatherStatePatterns on WeatherState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( WeatherStateList value)?  list,TResult Function( WeatherStateResult value)?  result,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( WeatherStateIdle value)?  idle,TResult Function( WeatherStateLoading value)?  loading,TResult Function( WeatherStateError value)?  error,TResult Function( WeatherStateResult value)?  result,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case WeatherStateList() when list != null:
-return list(_that);case WeatherStateResult() when result != null:
+case WeatherStateIdle() when idle != null:
+return idle(_that);case WeatherStateLoading() when loading != null:
+return loading(_that);case WeatherStateError() when error != null:
+return error(_that);case WeatherStateResult() when result != null:
 return result(_that);case _:
   return orElse();
 
@@ -78,11 +80,13 @@ return result(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( WeatherStateList value)  list,required TResult Function( WeatherStateResult value)  result,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( WeatherStateIdle value)  idle,required TResult Function( WeatherStateLoading value)  loading,required TResult Function( WeatherStateError value)  error,required TResult Function( WeatherStateResult value)  result,}){
 final _that = this;
 switch (_that) {
-case WeatherStateList():
-return list(_that);case WeatherStateResult():
+case WeatherStateIdle():
+return idle(_that);case WeatherStateLoading():
+return loading(_that);case WeatherStateError():
+return error(_that);case WeatherStateResult():
 return result(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
@@ -97,11 +101,13 @@ return result(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( WeatherStateList value)?  list,TResult? Function( WeatherStateResult value)?  result,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( WeatherStateIdle value)?  idle,TResult? Function( WeatherStateLoading value)?  loading,TResult? Function( WeatherStateError value)?  error,TResult? Function( WeatherStateResult value)?  result,}){
 final _that = this;
 switch (_that) {
-case WeatherStateList() when list != null:
-return list(_that);case WeatherStateResult() when result != null:
+case WeatherStateIdle() when idle != null:
+return idle(_that);case WeatherStateLoading() when loading != null:
+return loading(_that);case WeatherStateError() when error != null:
+return error(_that);case WeatherStateResult() when result != null:
 return result(_that);case _:
   return null;
 
@@ -119,10 +125,12 @@ return result(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<WeatherCardViewModel> list)?  list,TResult Function( WeatherCardViewModel weatherCardViewModel)?  result,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  idle,TResult Function()?  loading,TResult Function( String message)?  error,TResult Function( WeatherCardViewModel weatherCardViewModel)?  result,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case WeatherStateList() when list != null:
-return list(_that.list);case WeatherStateResult() when result != null:
+case WeatherStateIdle() when idle != null:
+return idle();case WeatherStateLoading() when loading != null:
+return loading();case WeatherStateError() when error != null:
+return error(_that.message);case WeatherStateResult() when result != null:
 return result(_that.weatherCardViewModel);case _:
   return orElse();
 
@@ -141,10 +149,12 @@ return result(_that.weatherCardViewModel);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<WeatherCardViewModel> list)  list,required TResult Function( WeatherCardViewModel weatherCardViewModel)  result,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  idle,required TResult Function()  loading,required TResult Function( String message)  error,required TResult Function( WeatherCardViewModel weatherCardViewModel)  result,}) {final _that = this;
 switch (_that) {
-case WeatherStateList():
-return list(_that.list);case WeatherStateResult():
+case WeatherStateIdle():
+return idle();case WeatherStateLoading():
+return loading();case WeatherStateError():
+return error(_that.message);case WeatherStateResult():
 return result(_that.weatherCardViewModel);}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -159,10 +169,12 @@ return result(_that.weatherCardViewModel);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<WeatherCardViewModel> list)?  list,TResult? Function( WeatherCardViewModel weatherCardViewModel)?  result,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  idle,TResult? Function()?  loading,TResult? Function( String message)?  error,TResult? Function( WeatherCardViewModel weatherCardViewModel)?  result,}) {final _that = this;
 switch (_that) {
-case WeatherStateList() when list != null:
-return list(_that.list);case WeatherStateResult() when result != null:
+case WeatherStateIdle() when idle != null:
+return idle();case WeatherStateLoading() when loading != null:
+return loading();case WeatherStateError() when error != null:
+return error(_that.message);case WeatherStateResult() when result != null:
 return result(_that.weatherCardViewModel);case _:
   return null;
 
@@ -174,49 +186,107 @@ return result(_that.weatherCardViewModel);case _:
 /// @nodoc
 
 
-class WeatherStateList implements WeatherState {
-  const WeatherStateList({required final  List<WeatherCardViewModel> list}): _list = list;
+class WeatherStateIdle implements WeatherState {
+  const WeatherStateIdle();
   
 
- final  List<WeatherCardViewModel> _list;
- List<WeatherCardViewModel> get list {
-  if (_list is EqualUnmodifiableListView) return _list;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_list);
-}
 
 
-/// Create a copy of WeatherState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$WeatherStateListCopyWith<WeatherStateList> get copyWith => _$WeatherStateListCopyWithImpl<WeatherStateList>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WeatherStateList&&const DeepCollectionEquality().equals(other._list, _list));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WeatherStateIdle);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_list));
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'WeatherState.list(list: $list)';
+  return 'WeatherState.idle()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class WeatherStateLoading implements WeatherState {
+  const WeatherStateLoading();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WeatherStateLoading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'WeatherState.loading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class WeatherStateError implements WeatherState {
+  const WeatherStateError(this.message);
+  
+
+ final  String message;
+
+/// Create a copy of WeatherState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$WeatherStateErrorCopyWith<WeatherStateError> get copyWith => _$WeatherStateErrorCopyWithImpl<WeatherStateError>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WeatherStateError&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'WeatherState.error(message: $message)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $WeatherStateListCopyWith<$Res> implements $WeatherStateCopyWith<$Res> {
-  factory $WeatherStateListCopyWith(WeatherStateList value, $Res Function(WeatherStateList) _then) = _$WeatherStateListCopyWithImpl;
+abstract mixin class $WeatherStateErrorCopyWith<$Res> implements $WeatherStateCopyWith<$Res> {
+  factory $WeatherStateErrorCopyWith(WeatherStateError value, $Res Function(WeatherStateError) _then) = _$WeatherStateErrorCopyWithImpl;
 @useResult
 $Res call({
- List<WeatherCardViewModel> list
+ String message
 });
 
 
@@ -224,19 +294,19 @@ $Res call({
 
 }
 /// @nodoc
-class _$WeatherStateListCopyWithImpl<$Res>
-    implements $WeatherStateListCopyWith<$Res> {
-  _$WeatherStateListCopyWithImpl(this._self, this._then);
+class _$WeatherStateErrorCopyWithImpl<$Res>
+    implements $WeatherStateErrorCopyWith<$Res> {
+  _$WeatherStateErrorCopyWithImpl(this._self, this._then);
 
-  final WeatherStateList _self;
-  final $Res Function(WeatherStateList) _then;
+  final WeatherStateError _self;
+  final $Res Function(WeatherStateError) _then;
 
 /// Create a copy of WeatherState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? list = null,}) {
-  return _then(WeatherStateList(
-list: null == list ? _self._list : list // ignore: cast_nullable_to_non_nullable
-as List<WeatherCardViewModel>,
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(WeatherStateError(
+null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

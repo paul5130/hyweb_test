@@ -14,6 +14,7 @@ Future<List<Location>> fetchLocationList(Ref ref) async {
     ),
   );
   if (response.statusCode == 200) {
+    await Future.delayed(const Duration(seconds: 1));
     final data = response.data as Map<String, dynamic>;
     final record = Records.fromJson(data['records'] as Map<String, dynamic>);
     return record.location;
