@@ -7,6 +7,17 @@ part 'weather_state_resullt.g.dart';
 class WeatherStateResullt extends _$WeatherStateResullt {
   @override
   Future<WeatherState> build() async {
-    return WeatherState.idle();
+    return _fetchData();
   }
+
+  Future<WeatherState> _fetchData() async {
+    // final locationList = await _fetchLocationList();
+    // TODO: conver to WeatherResultViewModel
+    return WeatherState.loading();
+  }
+
+  // Future<List<Location>> _fetchLocationList() async {
+  //   final locationList = await ref.read(fetchLocationListProvider.future);
+  //   return locationList;
+  // }
 }

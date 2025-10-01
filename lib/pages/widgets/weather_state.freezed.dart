@@ -186,8 +186,8 @@ return result(_that.weatherCardViewModel);case _:
 /// @nodoc
 
 
-class WeatherStateIdle implements WeatherState {
-  const WeatherStateIdle();
+class WeatherStateIdle extends WeatherState {
+  const WeatherStateIdle(): super._();
   
 
 
@@ -218,8 +218,8 @@ String toString() {
 /// @nodoc
 
 
-class WeatherStateLoading implements WeatherState {
-  const WeatherStateLoading();
+class WeatherStateLoading extends WeatherState {
+  const WeatherStateLoading(): super._();
   
 
 
@@ -250,8 +250,8 @@ String toString() {
 /// @nodoc
 
 
-class WeatherStateError implements WeatherState {
-  const WeatherStateError({required this.message});
+class WeatherStateError extends WeatherState {
+  const WeatherStateError({required this.message}): super._();
   
 
  final  String message;
@@ -316,8 +316,8 @@ as String,
 /// @nodoc
 
 
-class WeatherStateResult implements WeatherState {
-  const WeatherStateResult({required this.weatherCardViewModel});
+class WeatherStateResult extends WeatherState {
+  const WeatherStateResult({required this.weatherCardViewModel}): super._();
   
 
  final  WeatherCardViewModel weatherCardViewModel;

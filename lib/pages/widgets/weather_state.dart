@@ -5,6 +5,7 @@ part 'weather_state.freezed.dart';
 
 @freezed
 sealed class WeatherState with _$WeatherState {
+  const WeatherState._();
   const factory WeatherState.idle() = WeatherStateIdle;
   const factory WeatherState.loading() = WeatherStateLoading;
   const factory WeatherState.error({required String message}) =
