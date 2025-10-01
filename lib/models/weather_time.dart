@@ -17,6 +17,9 @@ class WeatherTime extends Equatable {
   final String endTime;
   final WeatherParameter parameter;
 
+  DateTime get startDateTime => DateTime.parse(startTime.replaceAll(' ', 'T'));
+  DateTime get endDateTime => DateTime.parse(endTime.replaceAll(' ', 'T'));
+
   factory WeatherTime.fromJson(Map<String, dynamic> json) =>
       _$WeatherTimeFromJson(json);
 

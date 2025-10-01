@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'weather_state_resullt.dart';
+part of 'weather_state_result.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,34 +9,34 @@ part of 'weather_state_resullt.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(WeatherStateResullt)
-const weatherStateResulltProvider = WeatherStateResulltProvider._();
+@ProviderFor(WeatherStateResult)
+const weatherStateResultProvider = WeatherStateResultProvider._();
 
-final class WeatherStateResulltProvider
-    extends $AsyncNotifierProvider<WeatherStateResullt, WeatherState> {
-  const WeatherStateResulltProvider._()
+final class WeatherStateResultProvider
+    extends $AsyncNotifierProvider<WeatherStateResult, WeatherState> {
+  const WeatherStateResultProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'weatherStateResulltProvider',
+        name: r'weatherStateResultProvider',
         isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$weatherStateResulltHash();
+  String debugGetCreateSourceHash() => _$weatherStateResultHash();
 
   @$internal
   @override
-  WeatherStateResullt create() => WeatherStateResullt();
+  WeatherStateResult create() => WeatherStateResult();
 }
 
-String _$weatherStateResulltHash() =>
-    r'8123a5bb3e70597d29833cfdc77a2bc39f99818a';
+String _$weatherStateResultHash() =>
+    r'9e9186a5b7884180f8cebb70b417e9982f407ee9';
 
-abstract class _$WeatherStateResullt extends $AsyncNotifier<WeatherState> {
+abstract class _$WeatherStateResult extends $AsyncNotifier<WeatherState> {
   FutureOr<WeatherState> build();
   @$mustCallSuper
   @override

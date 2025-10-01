@@ -1,5 +1,6 @@
 class WeatherResultViewModel {
   WeatherResultViewModel({
+    required this.cityName,
     required this.startTime,
     required this.endTime,
     required this.description,
@@ -8,6 +9,7 @@ class WeatherResultViewModel {
     required this.minTemperature,
     required this.comfortIndex,
   });
+  final String cityName;
   final String startTime;
   final String endTime;
   final String description;
