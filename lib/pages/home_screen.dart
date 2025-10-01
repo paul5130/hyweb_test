@@ -14,15 +14,22 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   late TextEditingController searchController;
+  late FocusNode searchFocusNode;
+
   @override
   void initState() {
     super.initState();
     searchController = TextEditingController(text: ref.read(searchProvider));
+    searchFocusNode = FocusNode();
+    searchFocusNode.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
   void dispose() {
     searchController.dispose();
+    searchFocusNode.dispose();
     super.dispose();
   }
 
@@ -47,18 +54,34 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                TextField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: searchController,
+                        focusNode: searchFocusNode,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.search),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          labelText: '搜尋',
+                          hintText: '輸入城市名',
+                        ),
+                        onChanged: (value) =>
+                            ref.read(searchProvider.notifier).state = value,
+                      ),
                     ),
-                    labelText: '搜尋',
-                    hintText: '輸入城市名',
-                  ),
-                  onChanged: (value) =>
-                      ref.read(searchProvider.notifier).state = value,
+                    if (searchFocusNode.hasFocus)
+                      TextButton(
+                        onPressed: () {
+                          searchController.clear();
+                          ref.read(searchProvider.notifier).state = '';
+                          searchFocusNode.unfocus();
+                        },
+                        child: const Text('取消'),
+                      ),
+                  ],
                 ),
                 const SizedBox(height: 8),
                 Expanded(
