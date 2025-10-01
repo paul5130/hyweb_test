@@ -1,7 +1,7 @@
 part of 'weather_state_ui.dart';
 
 class WeatherCardViewModel {
-  final List<WeatherCellViewModel> weatherCellViewModels;
+  final List<WeatherResultViewModel> weatherCellViewModels;
   WeatherCardViewModel({required this.weatherCellViewModels});
 }
 

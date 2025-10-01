@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hyweb_test/viewmodels/weather_cell_viewmodel.dart';
+import 'package:hyweb_test/viewmodels/weather_result_viewmodel.dart';
 
 class WeatherCell extends StatelessWidget {
   const WeatherCell({super.key, required this.viewModel});
-  final WeatherCellViewModel viewModel;
+  final WeatherResultViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
-class WeatherCellViewModel {
-  WeatherCellViewModel({
+class WeatherResultViewModel {
+  WeatherResultViewModel({
     required this.startTime,
     required this.endTime,
     required this.description,

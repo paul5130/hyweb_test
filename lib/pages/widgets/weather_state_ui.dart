@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hyweb_test/pages/widgets/weather_cell.dart';
-import 'package:hyweb_test/viewmodels/weather_cell_viewmodel.dart';
+import 'package:hyweb_test/viewmodels/weather_result_viewmodel.dart';
 part 'weather_state_idle_ui.dart';
 part 'weather_state_loading_ui.dart';
 part 'weather_state_error_ui.dart';
