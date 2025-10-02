@@ -22,3 +22,13 @@
 
 - **資料流示意圖**：
   - API → Model → ViewModel → WeatherStateResult Provider → UI
+
+---
+
+## Flutter版本
+- **Flutter** 3.35.4 / **Dart** 3.9.2
+
+## 第三方套件
+- **Riverpod** (狀態管理)
+- **Dio** (API 請求)
+- **Freezed** (資料模型 / 狀態)
