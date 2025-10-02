@@ -1,16 +1,24 @@
-# hyweb_test
+# Weather Forecast App
 
-A new Flutter project.
+這是一個使用 **Flutter + Riverpod** 開發的天氣查詢應用程式，根據使用者輸入的縣市名稱，顯示中央氣象局 36 小時天氣預報。
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 功能需求四種狀態：
 
-A few resources to get you started if this is your first Flutter project:
+- **Idle**：資料載入完成，但尚未搜尋，顯示提示訊息。
+- **Loading**：搜尋時顯示讀取中 (CircularProgressIndicator)。
+- **Result**：搜尋成功後顯示單一縣市的天氣資訊卡片。
+- **Error**：搜尋不到縣市或 API 請求失敗時，顯示錯誤訊息。
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 技術架構
+
+- **狀態管理**：Riverpod + Code Generation（`@riverpod` annotation）
+- **UI**：
+  - AppBar 中提供搜尋框
+  - 輸入縣市名稱後篩選對應天氣資訊並顯示卡片
+
+- **資料流示意圖**：
+  - API → Model → ViewModel → WeatherStateResult Provider → UI
