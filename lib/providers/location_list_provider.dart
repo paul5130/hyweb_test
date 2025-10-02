@@ -20,11 +20,11 @@ Future<List<Location>> fetchLocationList(Ref ref) async {
       final record = Records.fromJson(data['records'] as Map<String, dynamic>);
       return record.location;
     } else {
-      throw Exception(
+      throw StateError(
         'Failed to load location list: HTTP ${response.statusCode}',
       );
     }
-  } catch (e, st) {
-    throw AsyncError(e, st);
+  } catch (e, _) {
+    throw StateError(e.toString());
   }
 }

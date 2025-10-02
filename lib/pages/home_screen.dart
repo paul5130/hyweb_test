@@ -75,9 +75,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           result: (weatherCardViewModel) =>
               WeatherStateResultUi(weatherCardViewModel: weatherCardViewModel),
         ),
-        error: (error, stackTrace) {
-          return Center(child: Text(error.toString()));
-        },
+        error: (error, _) => Center(child: Text(error.toString())),
         loading: () => const Center(child: CircularProgressIndicator()),
       ),
     );
