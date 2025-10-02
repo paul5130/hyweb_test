@@ -14,9 +14,7 @@ class WeatherStateResult extends _$WeatherStateResult {
 
   @override
   Future<WeatherState> build() async {
-    state = const AsyncData(WeatherState.idle());
     try {
-      state = const AsyncLoading();
       final locationList = await ref.watch(fetchLocationListProvider.future);
       final List<WeatherCardViewModel> list = [];
 
@@ -86,7 +84,7 @@ class WeatherStateResult extends _$WeatherStateResult {
           .toList();
       if (filteredList.isNotEmpty) {
         state = AsyncData(
-          WeatherState.result(weatherCardViewModel: _allData.first),
+          WeatherState.result(weatherCardViewModel: filteredList.first),
         );
       } else {
         state = AsyncData(WeatherState.error('沒有符合條件的資料'));
